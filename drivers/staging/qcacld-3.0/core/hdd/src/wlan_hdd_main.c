@@ -9297,6 +9297,7 @@ static uint8_t *convert_level_to_string(uint32_t level)
  */
 void wlan_hdd_display_tx_rx_histogram(struct hdd_context *hdd_ctx)
 {
+#ifdef WLAN_DEBUG
 	int i;
 
 #ifdef MSM_PLATFORM
@@ -9337,6 +9338,7 @@ void wlan_hdd_display_tx_rx_histogram(struct hdd_context *hdd_ctx)
 					hdd_ctx->hdd_txrx_hist[i].
 						next_tx_level));
 	}
+#endif
 }
 
 /**
