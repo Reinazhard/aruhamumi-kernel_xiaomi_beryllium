@@ -1869,11 +1869,8 @@ void scheduler_ipi(void)
 							!got_boost_kick())
 		return;
 
-	if (got_boost_kick()) {
-		struct rq *rq = cpu_rq(cpu);
-
+	if (got_boost_kick())
 		clear_boost_kick(cpu);
-	}
 
 	/*
 	 * Not all reschedule IPI handlers call irq_enter/irq_exit, since
