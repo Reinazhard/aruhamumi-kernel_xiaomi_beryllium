@@ -2662,18 +2662,6 @@ thermal_message_of_batt_show(struct device *dev,
 static DEVICE_ATTR(batt_message, 0644,
 		   thermal_message_of_batt_show, NULL);
 
-#ifdef CONFIG_DRM
-static ssize_t
-thermal_screen_state_show(struct device *dev,
-				      struct device_attribute *attr, char *buf)
-{
-	return snprintf(buf, PAGE_SIZE, "%d\n", sm.screen_state);
-}
-
-static DEVICE_ATTR(screen_state, 0644,
-		   thermal_screen_state_show, NULL);
-#endif
-
 static ssize_t
 thermal_sconfig_show(struct device *dev,
 				      struct device_attribute *attr, char *buf)
@@ -2750,11 +2738,6 @@ static int create_thermal_message_node(void) {
 		ret = sysfs_create_file(&thermal_message_dev.kobj, &dev_attr_batt_message.attr);
 		if (ret < 0)
 			pr_warn("Thermal: create batt message node failed\n");
-#ifdef CONFIG_DRM
-		ret = sysfs_create_file(&thermal_message_dev.kobj, &dev_attr_screen_state.attr);
-		if (ret < 0)
-			pr_warn("Thermal: create batt message node failed\n");
-#endif
 		ret = sysfs_create_file(&thermal_message_dev.kobj, &dev_attr_sconfig.attr);
 		if (ret < 0)
 			pr_warn("Thermal: create sconfig node failed\n");
@@ -2775,9 +2758,6 @@ static void destroy_thermal_message_node(void) {
 	sysfs_remove_file(&thermal_message_dev.kobj, &dev_attr_temp_state.attr);
 	sysfs_remove_file(&thermal_message_dev.kobj, &dev_attr_sconfig.attr);
 	sysfs_remove_file(&thermal_message_dev.kobj, &dev_attr_boost.attr);
-#ifdef CONFIG_DRM
-	sysfs_remove_file(&thermal_message_dev.kobj, &dev_attr_screen_state.attr);
-#endif
 	sysfs_remove_file(&thermal_message_dev.kobj, &dev_attr_batt_message.attr);
 	device_unregister(&thermal_message_dev);
 }
