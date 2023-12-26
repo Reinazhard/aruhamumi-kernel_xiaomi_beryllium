@@ -10,7 +10,7 @@
 #include <linux/kthread.h>
 #include <linux/msm_drm_notify.h>
 #include <linux/slab.h>
-#include <uapi/linux/sched/types.h>
+#include <linux/sched.h>
 
 enum {
 	SCREEN_OFF,
