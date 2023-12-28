@@ -12519,6 +12519,8 @@ static inline void walt_check_for_rotation(struct rq *rq)
 }
 #endif
 
+extern int cass_best_cpu(struct task_struct *p, int prev_cpu, bool sync);
+
 static DEFINE_RAW_SPINLOCK(migration_lock);
 void check_for_migration(struct rq *rq, struct task_struct *p)
 {
@@ -12537,7 +12539,7 @@ void check_for_migration(struct rq *rq, struct task_struct *p)
 
 		raw_spin_lock(&migration_lock);
 		rcu_read_lock();
-		new_cpu = select_energy_cpu_brute(p, cpu, prev_cpu, 0);
+		new_cpu = cass_best_cpu(p, prev_cpu, 0);
 		rcu_read_unlock();
 		if ((new_cpu != prev_cpu) && capacity_orig_of(new_cpu) >
 					capacity_orig_of(prev_cpu))) {
