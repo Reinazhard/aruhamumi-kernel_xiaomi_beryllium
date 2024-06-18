@@ -544,7 +544,7 @@ static void complete_commit_cleanup(struct work_struct *work)
 	struct msm_commit *c = container_of(work, typeof(*c), clean_work);
 	struct drm_atomic_state *state = c->state;
 
-	drm_atomic_state_put(state);
+	drm_atomic_state_free(state);
 
 	commit_destroy(c);
 }
